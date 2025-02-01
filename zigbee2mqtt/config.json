@@ -1,8 +1,8 @@
 {
-  "name": "Zigbee2MQTT",
-  "version": "v2.0.0",
+  "name": "Zigbee2MQTT Edge",
+  "version": "edge",
   "slug": "zigbee2mqtt",
-  "description": "Use your ZigBee devices without the vendor's bridge or gateway",
+  "description": "Development build of the Zigbee2MQTT add-on",
   "uart": true,
   "udev": true,
   "url": "https://github.com/namelessd76/hassio-zigbee2mqtt/tree/master/zigbee2mqtt",
@@ -59,6 +59,7 @@
     "serial": {}
   },
   "schema": {
+    "disable_tuya_default_response": "bool?",
     "data_path": "str",
     "socat": {
       "enabled": "bool?",
@@ -73,8 +74,7 @@
       "key": "str?",
       "cert": "str?",
       "user": "str?",
-      "password": "str?",
-      "base_topic": "str?"
+      "password": "str?"
     },
     "serial": {
       "port": "str?",
@@ -84,5 +84,5 @@
     },
     "watchdog": "str?"
   },
-  "image": "zigbee2mqtt/zigbee2mqtt-{arch}"
+  "image": "zigbee2mqtt/zigbee2mqtt-edge-{arch}"
 }

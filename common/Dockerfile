@@ -15,7 +15,7 @@ RUN apk add --no-cache --virtual .buildtools npm make gcc g++ linux-headers udev
     then \
         echo "Installing Edge version" && \
         git clone -b dev --single-branch --depth 1 \
-        https://github.com/Koenkk/zigbee2mqtt.git /app && \
+        https://github.com/namelessd76/zigbee2mqtt.git /app && \
         mkdir /app/dist && \
         jq -n --arg commit $(eval cd /app;git rev-parse --short HEAD) '$commit' > /app/dist/.hash ; \
     else \
