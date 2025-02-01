@@ -1,8 +1,8 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM as base
+FROM ghcr.io/home-assistant/aarch64-base:3.21 as base
+ENV BUILD_FROM="ghcr.io/home-assistant/aarch64-base:3.21"
 
 ENV LANG C.UTF-8
-ARG BUILD_VERSION
+ENV BUILD_VERSION="edge"
 
 RUN apk add --no-cache socat tini nodejs eudev
 
@@ -14,7 +14,7 @@ RUN apk add --no-cache --virtual .buildtools npm make gcc g++ linux-headers udev
     if [ "${BUILD_VERSION}" = "edge" ]; \
     then \
         echo "Installing Edge version" && \
-        git clone -b dev --single-branch --depth 1 \
+        git clone -b master --single-branch --depth 1 \
         https://github.com/namelessd76/zigbee2mqtt.git /app && \
         mkdir /app/dist && \
         jq -n --arg commit $(eval cd /app;git rev-parse --short HEAD) '$commit' > /app/dist/.hash ; \
