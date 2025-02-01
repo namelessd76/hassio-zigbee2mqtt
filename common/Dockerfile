@@ -1,13 +1,13 @@
-ARG BUILD_FROM
-FROM $BUILD_FROM as base
+FROM ghcr.io/home-assistant/aarch64-base:3.21 AS base
 
-ENV LANG C.UTF-8
-ARG BUILD_VERSION
+ENV LANG="C.UTF-8"
+ENV BUILD_FROM="ghcr.io/home-assistant/aarch64-base:3.21"
+ENV BUILD_VERSION="edge"
 
 RUN apk add --no-cache socat tini nodejs eudev
 
 # Dependencies and build
-FROM base as dependencies_and_build
+FROM base AS dependencies_and_build
 
 RUN apk add --no-cache --virtual .buildtools npm make gcc g++ linux-headers udev git python3 && \
     npm install -g pnpm && \
@@ -38,7 +38,7 @@ RUN apk add --no-cache --virtual .buildtools npm make gcc g++ linux-headers udev
     pnpm rebuild @serialport/bindings-cpp
 
 # Release
-FROM base as release
+FROM base AS release
 
 WORKDIR /app
 
@@ -47,6 +47,6 @@ COPY --from=dependencies_and_build /app/node_modules ./node_modules
 COPY --from=dependencies_and_build /app/dist ./dist
 COPY --from=dependencies_and_build /app/package.json /app/LICENSE /app/index.js ./
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
 
 ENTRYPOINT [ "/sbin/tini", "--", "/docker-entrypoint.sh"]

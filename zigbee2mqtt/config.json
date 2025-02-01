@@ -84,5 +84,5 @@
     },
     "watchdog": "str?"
   },
-  "image": "namelessd76/namelessd76_hassiozigbee2mqtt"
+  "image": "namelessd76/zigbee2mqtt-aarch64"
 }
