@@ -19,13 +19,13 @@ RUN apk add --no-cache --virtual .buildtools npm make gcc g++ linux-headers udev
         mkdir /app/dist && \
         jq -n --arg commit $(eval cd /app;git rev-parse --short HEAD) '$commit' > /app/dist/.hash ; \
     else \
-        echo "Installing Stable version ${BUILD_VERSION%-*}" && \
+        echo "Installing Stable version ${BUILD_VERSION%}" && \
         curl -sL -o "/app.tar.gz" \
-        "https://github.com/Koenkk/zigbee2mqtt/archive/${BUILD_VERSION%-*}.tar.gz" && \
+        "https://github.com/namelessd76/zigbee2mqtt/archive/${BUILD_VERSION%}.tar.gz" && \
         tar xzvf "/app.tar.gz"  && rm "/app.tar.gz" && \
-        mv -v "zigbee2mqtt-${BUILD_VERSION%-*}" app && \
+        mv -v "zigbee2mqtt-${BUILD_VERSION%}" app && \
         mkdir /app/dist && \
-        jq -n --arg commit ${BUILD_VERSION%-*} '$commit' > /app/dist/.hash ; \
+        jq -n --arg commit ${BUILD_VERSION%} '$commit' > /app/dist/.hash ; \
     fi; \
     echo "Installed Zigbee2MQTT @ version $(cat /app/dist/.hash)" && \
     cd /app && \
