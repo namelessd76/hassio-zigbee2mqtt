@@ -1,8 +1,8 @@
-FROM ghcr.io/home-assistant/aarch64-base:3.21 as base
-ENV BUILD_FROM="ghcr.io/home-assistant/aarch64-base:3.21"
+ARG BUILD_FROM
+FROM $BUILD_FROM as base
 
 ENV LANG C.UTF-8
-ENV BUILD_VERSION="edge"
+ARG BUILD_VERSION
 
 RUN apk add --no-cache socat tini nodejs eudev
 
