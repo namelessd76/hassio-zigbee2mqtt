@@ -83,5 +83,6 @@
       "rtscts": "bool?"
     },
     "watchdog": "str?"
-  }
+  },
+  "image": "namelessd76/namelessd76_hassiozigbee2mqtt"
 }
